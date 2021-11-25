@@ -83,3 +83,50 @@ df = pd.DataFrame({'city': ['Mumbai', 'Delhi', 'Hyderabad', 'Chennai','Mumbai', 
 df.loc[(df['city'] == "Mumbai" ) & (df["month"] == "January"),['temp']]=100
 ```
 ![image](https://user-images.githubusercontent.com/42869040/143420127-edff7c40-e9b0-4f91-baad-7066b642a59b.png)
+
+
+```
+"""
+problem : 4 
+For this challenge you will calculate the median in an array within a sliding window.
+Where sliding window is first item of list. 
+
+Finding the sum of list excepting every iterating index item
+
+Given Array : [3, 1, 3, 5, 10, 6, 4, 3, 1]
+--------------------------------------------------
+sorted_slice : [1, 3, 5]
+sorted_slice : [3, 5, 10]
+sorted_slice : [5, 6, 10]
+sorted_slice : [4, 6, 10]
+sorted_slice : [3, 4, 6]
+sorted_slice : [1, 3, 4]
+sorted_slice : [1, 3]
+sorted_slice : [1]
+Expected Output :
+3,5,6,6,4,3
+"""
+
+
+def calcMedian(array):
+  sliding_window = array[0]
+  array.pop(0)
+  RESULT = []
+
+  for index,item in enumerate(array):
+    sorted_slice = sorted(array[index:sliding_window + index])
+
+    if (len(sorted_slice)==sliding_window) and len(sorted_slice)%2!=0:
+      median = sorted_slice[int(len(sorted_slice)/2)]
+      RESULT.append(median)
+
+    elif (len(sorted_slice)==sliding_window) and len(sorted_slice)%2==0:
+      start_index = len(sorted_slice)//2 - 1
+      median = arr[start_index:(start_index+1)+1]
+      median = (median[0] + median[1])//2
+      RESULT.append(median)
+
+  return ','.join(map(str,RESULT))
+  
+calcMedian([3,1,3,5,10,6,4,3,1])
+```
